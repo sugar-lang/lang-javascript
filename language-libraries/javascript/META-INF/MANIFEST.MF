@@ -1,22 +1,19 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.sugarj.javascript
-Bundle-SymbolicName: org.sugarj.javascript;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Name: org.sugarj.language.javascript
+Bundle-SymbolicName: org.sugarj.language.javascript;singleton:=true
+Bundle-Version: 1.2.0.qualifier
 Bundle-Activator: org.sugarj.javascript.Activator
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.sugarj.stdlib,
  org.spoofax.terms,
- org.strategoxt.imp.nativebundle,
- org.strategoxt.imp.runtime,
  org.strategoxt.strj,
- org.sugarj.languagelib,
  org.sugarj.common,
- org.eclipse.jdt.core
-Export-Package: org.sugarj,
+ org.sugarj.baselang
+ort-Package: org.sugarj,
  org.sugarj.languages,
  org.sugarj.javascript.init
-Eclipse-RegisterBuddy: org.sugarj.languagelib
+Eclipse-RegisterBuddy: org.sugarj.baselang
