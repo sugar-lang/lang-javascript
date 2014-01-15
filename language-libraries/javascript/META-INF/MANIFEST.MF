@@ -17,3 +17,4 @@ ort-Package: org.sugarj,
  org.sugarj.languages,
  org.sugarj.javascript.init
 Eclipse-RegisterBuddy: org.sugarj.baselang
+Eclipse-BundleShape: dir
