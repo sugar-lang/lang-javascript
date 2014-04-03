@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.spoofax.interpreter.terms.IStrategoTerm;
 import org.strategoxt.lang.Context;
@@ -88,14 +89,17 @@ public class JavaScriptProcessor extends AbstractBaseProcessor implements Serial
   }
 
   @Override
-  public void init(RelativePath sourceFile, Environment environment) {
-    this.sourceFile = sourceFile;
+  public void init(Set<RelativePath> sourceFiles, Environment environment) {
+	if (sourceFiles.size() != 1)
+      throw new IllegalArgumentException("Fomega can only compile one source file at a time.");
+
+	this.sourceFile = sourceFiles.iterator().next();
     jsOutFile = environment.createOutPath(FileCommands.dropExtension(sourceFile.getRelativePath()) + "." + getLanguage().getBinaryFileExtension());
     relNamespaceName = FileCommands.dropFilename(sourceFile.getRelativePath());
     decName = getRelativeModulePath(
                 FileCommands.dropExtension(
                 FileCommands.fileName(
-                sourceFile.getRelativePath())));
+                sourceFile)));
   }
 
   @Override
@@ -104,7 +108,7 @@ public class JavaScriptProcessor extends AbstractBaseProcessor implements Serial
   } 
   
   private void processNamespaceDecl(IStrategoTerm toplevelDecl) throws IOException {
-    String modPath = checkModulePath(toplevelDecl, sourceFile);
+    String modPath = checkModulePath(toplevelDecl, sourceFile.getRelativePath());
     relNamespaceName = extractRelativeNamespace(modPath);
     decName = extractSugarName(modPath);
     log.log("The SDF / Stratego package name is '" + relNamespaceName + "'.", Log.DETAIL);
@@ -129,10 +133,10 @@ public class JavaScriptProcessor extends AbstractBaseProcessor implements Serial
   }
   
   // Check that the declared module name matches the source relative path and file name
-  private String checkModulePath(IStrategoTerm modDecl, RelativePath sourceFile) throws IOException {
+  private String checkModulePath(IStrategoTerm modDecl, String modulePath) throws IOException {
     String declaredPath = extractModulePath(modDecl); 
-    if (sourceFile != null) {
-      String expectedPath = FileCommands.dropExtension(sourceFile.getRelativePath());
+    if (modulePath != null) {
+      String expectedPath = FileCommands.dropExtension(modulePath);
       if (!declaredPath.equals(expectedPath))
         throw new RuntimeException("The declared module '" + declaredPath + "'" + " does not match the expected package '" + expectedPath + "'.");
     }
