@@ -3,6 +3,7 @@ package org.sugarj;
 import static org.sugarj.common.ATermCommands.getApplicationSubterm;
 import static org.sugarj.common.Log.log;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Collections;
@@ -174,7 +175,7 @@ public class JavaScriptProcessor extends AbstractBaseProcessor implements Serial
   }
   
   private String getRelativeModulePath(String moduleName) {
-    return moduleName.replace(MODULE_SEP, Environment.sep);
+    return moduleName.replace(MODULE_SEP, File.separator);
   }
   
   @Override
