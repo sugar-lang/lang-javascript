@@ -14,8 +14,8 @@ import java.util.Set;
 import org.spoofax.interpreter.terms.IStrategoTerm;
 import org.strategoxt.lang.Context;
 import org.strategoxt.stratego_gpp.parse_pptable_file_0_0;
+import org.sugarj.baselang.IORelay;
 import org.sugarj.common.ATermCommands;
-import org.sugarj.common.Environment;
 import org.sugarj.common.FileCommands;
 import org.sugarj.common.Log;
 import org.sugarj.common.StringCommands;
@@ -90,7 +90,7 @@ public class JavaScriptProcessor extends AbstractBaseProcessor implements Serial
   }
 
   @Override
-  public void init(Set<RelativePath> sourceFiles, Environment environment) {
+  public void init(Set<RelativePath> sourceFiles, IORelay environment) {
 	if (sourceFiles.size() != 1)
       throw new IllegalArgumentException("Fomega can only compile one source file at a time.");
 
