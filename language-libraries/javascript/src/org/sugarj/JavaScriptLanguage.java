@@ -11,7 +11,9 @@ import org.sugarj.common.path.Path;
 
 public class JavaScriptLanguage extends AbstractBaseLanguage {
 
-  private JavaScriptLanguage() { }
+  private static final long serialVersionUID = -6558309435837995321L;
+
+private JavaScriptLanguage() { }
   
   private static JavaScriptLanguage instance = new JavaScriptLanguage();
   
